@@ -1,10 +1,10 @@
-FROM golang:1.14-buster AS easy-novnc-build
+FROM golang:1.21-bullseye AS easy-novnc-build
 WORKDIR /src
 RUN go mod init build && \
     go get github.com/geek1011/easy-novnc@v1.1.0 && \
     go build -o /bin/easy-novnc github.com/geek1011/easy-novnc
 
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends openbox tigervnc-standalone-server supervisor gosu && \
@@ -16,9 +16,9 @@ RUN apt-get update -y && \
     rm -rf /var/lib/apt/lists
 
 # RUN git clone https://github.com/supermerill/SuperSlicer.git 
-RUN wget https://github.com/supermerill/SuperSlicer/releases/download/2.3.57.11/SuperSlicer_2.3.57.11_linux64_220213.tar.zip && \
-    unzip SuperSlicer_2.3.57.11_linux64_220213.tar.zip && \
-    tar xf SuperSlicer_2.3.57.11_linux64_220213.tar
+RUN wget https://github.com/supermerill/SuperSlicer/releases/download/2.4.58.5/SuperSlicer_2.4.58.5_linux64_220924.tar.zip && \
+    unzip SuperSlicer_2.4.58.5_linux64_220924.tar.zip && \
+    tar xf SuperSlicer_2.4.58.5_linux64_220924.tar
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY menu.xml /etc/xdg/openbox/
