@@ -8,7 +8,7 @@ services:
             - superslic3r
         ports:
             - '8090:8080'
-        image: 'pilo1337/superslicer-docker:latest'
+        image: 'recrudesce/superslicer-docker:latest'
 
 networks:
   superslic3r:
